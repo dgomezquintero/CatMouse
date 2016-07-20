@@ -1,0 +1,146 @@
+import pygame
+import random
+
+#Colors
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+BLUE = (0, 0, 255)
+GREY = (127, 127, 127)
+ORANGE =(255,128,0)
+color = [BLACK, WHITE, GREEN, RED, BLUE, GREY, ORANGE]
+
+
+class Cat():
+    def __init__(self, x, y, x_speed, y_speed, size):
+        self.x = x
+        self.y = y
+        self.x_speed = x_speed
+        self.y_speed = y_speed
+        self.color = color
+        self.size = size
+
+    def running (self,screen,color, SCREEN_WIDTH, SCREEN_HEIGHT):
+        colorchoices = random.choice(color)
+        if self.x >= SCREEN_WIDTH - self.size or self.x < self.size:
+            self.x_speed = self.x_speed * -1
+
+        if self.y >= SCREEN_HEIGHT - self.size or self.y < self.size:
+            self.y_speed = self.y_speed * -1
+
+        self.x += self.x_speed 
+        self.y += self.y_speed
+        pygame.draw.circle(screen, colorchoices, [self.x, self.y], self.size)
+
+import pygame
+import random
+
+#Colors
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+BLUE = (0, 0, 255)
+GREY = (127, 127, 127)
+ORANGE =(255,128,0)
+color = [BLACK, WHITE, GREEN, RED, BLUE, GREY, ORANGE]
+
+
+class Cat():
+    def __init__(self, x, y, x_speed, y_speed, size):
+        self.x = x
+        self.y = y
+        self.x_speed = x_speed
+        self.y_speed = y_speed
+        self.color = color
+        self.size = size
+
+    def running (self,screen,color, SCREEN_WIDTH, SCREEN_HEIGHT):
+        if self.x >= SCREEN_WIDTH - self.size or self.x < self.size:
+            self.x_speed = self.x_speed * -1
+
+        if self.y >= SCREEN_HEIGHT - self.size or self.y < self.size:
+            self.y_speed = self.y_speed * -1
+
+        self.x += self.x_speed 
+        self.y += self.y_speed
+        pygame.draw.circle(screen, colorchoices, [self.x, self.y], self.size)
+
+    def eat():
+        if touch_mouse == True:
+            def texts(score):
+               font=pygame.font.Font(None,30)
+               cateating=font.render("YUM", 1,(255,255,255))
+               screen.blit(cateating, (500, 457))
+
+            
+
+class Mouse():
+    def __init__(self, xloc, yloc, xsp, ysp, sizem):
+        self.xloc = xloc
+        self.yloc = yloc
+        self.xsp = xsp
+        self.ysp = ysp
+        self.sizem = sizem
+
+    def runningm (self, screen, color, SCREEN_WIDTH, SCREEN_HEIGHT):
+        if self.xloc >= SCREEN_WIDTH - self.sizem or self.xloc < self.sizem:
+            self.xsp = self.xsp * -1
+        if self.yloc >= SCREEN_HEIGHT -self.sizem or self.yloc < self.sizem:
+            self.ysp = self.ysp * -1
+        self.xloc += self.xsp
+        self.yloc += self.ysp
+        pygame.draw.circle(screen, colorchoicem, [self.xloc, self.yloc], self.sizem)
+            
+
+def touch_mouse(x, y, xloc, yloc):
+        if pygame.sprite.collide_circle(cat1, mouse1):
+            return True
+            font=pygame.font.Font(None,30)
+            cateating=font.render("YUM", 1,(255,255,255))
+            screen.blit(cateating, (500, 457))
+        else:
+            return False
+
+
+
+
+pygame.init()
+SCREEN_WIDTH = 700
+SCREEN_HEIGHT = 500
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Cat and Mouse")
+done = False
+clock = pygame.time.Clock()
+
+info = pygame.display.Info()
+sw = info.current_w
+sh = info.current_h
+
+color = [BLACK, WHITE, GREEN, RED, BLUE, GREY, ORANGE]
+colorchoices = random.choice(color)
+colorchoicem = random.choice(color)
+xstartcat = random.randint(20,680)
+ystartcat = random.randint(20,480)
+xstartmouse = random.randint(20,680)
+ystartmouse = random.randint(20,480)
+#Start
+cat1 = Cat(xstartcat,ystartcat,5,2,30)
+mouse1 = Mouse(xstartmouse, ystartmouse, 10, 4, 20)
+while not done:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            done = True
+    screen.fill(ORANGE)
+    cat1.running(screen,color, SCREEN_WIDTH, SCREEN_HEIGHT)
+    mouse1.runningm(screen,color, SCREEN_WIDTH, SCREEN_HEIGHT)
+    cat1.eat
+    
+    pygame.display.flip()
+    clock.tick(60)
+
+
+pygame.quit()
+exit()
+
